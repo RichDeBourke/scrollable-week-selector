@@ -9,7 +9,7 @@ Scrollable Week Selector / Indicator
   * Mouse-only and mouse/touch versions (difference in row height)
     * *Google requires that touch "tap targets" be at least 48 pixels high*
 
-![alt text](CalendarExamples.png)
+![Example of mouse-only and mouse/touch calendars](images/CalendarExamples.png)
 
 ## Usage
 
@@ -93,11 +93,9 @@ The readWeeks array is an array of true/false with at least the same number of e
 #### onClick function
 Clicking with the mouse or tapping with a finger anywhere in a row will call the onClick function and pass a date string for Sunday's date for the week that was clicked/tapped to the function (the value of `this` is the date string). This can be used, for example, to change to a different URL:
 
-
     onClick: function () {
       window.location.assign(this);
     }
-
 
 ## How the plugin works
 
@@ -142,7 +140,7 @@ The calendar consists of eight main components:
   8. Calendar weeks table
     * Each row in the table is one week
   
-![alt text](CalendarComponents.png)
+![Images of the eight main components of the calendar](images/CalendarComponents.png)
 
 #### Create the table
 The plugin uses a date object and loops to build the table. The date object is set to the starting date. An outer loop is used to create the weeks and an inner loop is used to create the days, incrementing the date object each day.
@@ -188,8 +186,10 @@ Making something work across all platforms runs into complications. While most q
 #### overflow: hidden and margin: auto on IE & Edge
 The version of the scroll calendar page used a grid (Foundation 5) and the border layer was set to overflow: hidden to hide the browser's scrollbar. For putting the plugin on Github, I used a container div that was centered on the page using margin: auto.
 
-On Microsoft browsers (IE11 & Edge) a white "gap" appeared on the right side of the layout, between the table and border (there wasn't any issue with margin: auto on Chrome, Firefox, or Safari). The gap would only show if the parent div had an odd number of pixels such that the auto margin on each side ended with .5px. 
-![alt text](IEGap.png)
+On Microsoft browsers (IE11 & Edge) a white "gap" appeared on the right side of the layout, between the table and border (there wasn't any issue with margin: auto on Chrome, Firefox, or Safari). The gap would only show if the parent div had an odd number of pixels such that the auto margin on each side ended with .5px.
+
+![Example of the gap problem on IE11 browser](images/IEGap.png)
+
 My solution was to add a layer on top with that layer's overflow set to auto so that layer would hide the browser's scrollbars.
 
 #### :hover for devices with both a mouse and touch
