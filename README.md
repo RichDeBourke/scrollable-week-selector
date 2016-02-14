@@ -50,11 +50,11 @@ For scrolling to a specific week, create a handle to the calendar plugin, and th
 The date should be a Sunday.
 
 ## Demos
-[Simple demo](http://google.com) - Just the calendar.
+[Simple demo](http://richdebourke.github.io/scrollable-week-selector/simple.html) - Just the calendar.
 
-[Full function demo](http://google.com) - Calendar with week selection/indication capability and a demo of the setWeek function.
+[Full function demo](http://RichDeBourke.github.io/scrollable-week-selector) - Calendar with week selection/indication capability and a demo of the setWeek function.
 
-[In operation](http://google.com) - Calendar in operation.
+[In operation](http://goo.gl/Dk18xU) - Calendar in operation.
 
 ## Options
 
@@ -88,7 +88,7 @@ The readWeeks array is an array of true/false with at least the same number of e
 
     [true, true, true, true, true, true, false, ... false]
     
-*Please refer to my JavaScript plugin, [Binary Store/Retrieve](http://goo.gl/Dk18xU), for saving and retrieving status data for weeks that have been visited.*
+*Please refer to my JavaScript plugin, [Binary Store/Retrieve](https://github.com/RichDeBourke/javascript-binary-data-storage), for saving and retrieving status data for weeks that have been visited.*
 
 #### onClick function
 Clicking with the mouse or tapping with a finger anywhere in a row will call the onClick function and pass a date string for Sunday's date for the week that was clicked/tapped to the function (the value of `this` is the date string). This can be used, for example, to change to a different URL:
