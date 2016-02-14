@@ -1,1 +1,98 @@
-Hello World
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>jQuery Scrollable Calendar Demo</title>
+
+    <meta name="description" content="A scrollable calendarn plugin" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" >
+
+    <!-- Styles for the general page layout -->
+    <link rel="stylesheet" href="css/CalendarDemo.css" >
+    <!-- Styles for the calendar itself-->
+    <link rel="stylesheet" href="css/Calendar.css" >
+
+</head>
+
+<body>
+    <div class="outer-container">
+        <div class="container">
+            <div id="week-select-calendar"></div>
+            <div class="legend-container">
+                <h4>Legend</h4>
+                <div class="currently-reading">Current</div>
+                <div class="not-read">Not read</div>
+                <div class="read">Read &ndash; &#10004;</div>
+            </div>
+            <div class="button-container">
+                <ul class="button">
+                    <li id="scroll-to-date" title="Scroll to 2015-09-02">
+                        Scroll To
+                    </li>
+                    <li id="clear-local-storage" title="Clear the history that has been saved in local storage">
+                        Clear Storage
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.calendar.js"></script>
+    <script type="text/javascript" src="js/WeekHistory.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            "use strict";
+            var weeklyHistoryArray = window.getWeeklyHistory("calendarHistory", 522),
+                touchStatus,
+                $calendarHandle,
+                $rowFirstTd;
+
+            // Set the calendar variables (normally I set the variables when they're declared)
+            if (('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch) || (navigator.MaxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)) {
+                touchStatus = true;
+            } else {
+                touchStatus = false;
+            }
+
+            $("#week-select-calendar").scrollableCalendar({
+                calendarTitle: "jQuery Scrollable Week Selector / Indicator",
+                touch: touchStatus,
+                startDate: "2012-01-01",
+                endDate: "2017-01-21",
+                readWeeks: weeklyHistoryArray,
+                onClick: function () {
+                    // Add this week to the history array
+                    window.updateWeeklyHistory("2012-01-01", this);
+                    // Add a class to each calendar cell to change the background color and add a checkmark
+                    $rowFirstTd = $("[data-date='" + this + "']").children(":first-child");
+                    $rowFirstTd.removeClass("cal-even-month cal-odd-month").addClass("cal-month-read");
+                    if ($rowFirstTd.html() === "&nbsp;") {
+                        $rowFirstTd.html("&#10004;");
+                    }
+                }
+            });
+
+            $calendarHandle = $("#week-select-calendar").data("plugin_scrollableCalendar");
+
+            // Button for demonstrating how the calendar can scroll to a specific date
+            $("#scroll-to-date").on("click", function () {
+                $calendarHandle.setWeek("2015-09-02");
+            });
+
+            // Button for clearing the local storage, which is where the data for
+            // which dates are already visited / acted upon is stored
+            $("#clear-local-storage").on("click", function () {
+                window.clearHistory(true);
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>
+
