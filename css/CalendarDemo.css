@@ -80,7 +80,6 @@ h4 {
     position: relative;
     width: 256px; /* I'm not sure why, but for Edge, if this value is 255px, the inner width doesn't display correctly */
     margin: 0 auto 0 auto;
-    padding-top: 25px;
 }
 
 /* Calendar Legend using gradients to show odd/even month difference */
