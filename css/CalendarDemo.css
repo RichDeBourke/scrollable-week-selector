@@ -1,0 +1,137 @@
+html {
+    font-size: 100%;
+}
+
+body {
+    height: 100%;
+    line-height: 1.5;
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    color: #222222;
+    margin: 0;
+    padding: 0;
+}
+
+h4 {
+    margin: 1rem 0 1rem 0;
+}
+
+.button-container {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+
+.button {
+    display: inline-block;
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.button li {
+    position: relative;
+    float: left;
+    -moz-appearance: none;
+    background-color: #008cba;
+    box-sizing: border-box;
+    border-color: #007095;
+    border-radius: 0;
+    border-style: solid;
+    border-width: 0;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: normal;
+    line-height: normal;
+    padding: 0.5rem 0 0.5rem 0;
+    margin: 1.5rem 0 1rem 0;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 300ms ease-out 0s;
+}
+
+.button li:hover, .button li:focus {
+    background-color: #007095;
+}
+
+.button li:hover, .button li:focus {
+    color: #ffffff;
+}
+
+.button li:first-child {
+    border-bottom-left-radius: 1000px;
+    border-top-left-radius: 1000px;
+    width: 50%;
+}
+
+.button li:last-child {
+    border-bottom-right-radius: 1000px;
+    border-top-right-radius: 1000px;
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    width: 50%;
+}
+
+
+.container {
+    position: relative;
+    width: 256px; /* I'm not sure why, but for Edge, if this value is 255px, the inner width doesn't display correctly */
+    margin: 0 auto 0 auto;
+    padding-top: 25px;
+}
+
+/* Calendar Legend using gradients to show odd/even month difference */
+
+.legend-container {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    width: 255px;
+    box-sizing: border-box;
+}
+
+.currently-reading {
+    position: relative;
+    float: left;
+    width: 33%;
+    height: 25px;
+    font-size: 0.875rem;
+    box-sizing: border-box;
+    border: 1px solid #125716;
+    border-right-width: 0;
+    background-color: #00DB71;
+}
+
+.not-read {
+    position: relative;
+    float: left;
+    width: 33%;
+    height: 25px;
+    font-size: 0.875rem;
+    box-sizing: border-box;
+    border: 1px solid #125716;
+    margin-bottom: 0;
+    background-color: #e1ede2; /* fallback color if gradients are not supported */
+    background: -moz-linear-gradient(left, #e1ede2 0%, #e1ede2 50%, #bfdec0 51%, #bfdec0 100%); /* FF3.6+ */
+    background: -webkit-linear-gradient(left, #e1ede2 0%, #e1ede2 50%, #bfdec0 51%, #bfdec0 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, #e1ede2 0%, #e1ede2 50%, #bfdec0 51%, #bfdec0 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, #e1ede2 0%, #e1ede2 50%, #bfdec0 51%, #bfdec0 100%); /* IE10+ */
+    background: linear-gradient(to right, #e1ede2 0%, #e1ede2 50%, #bfdec0 51%, #bfdec0 100%); /* W3C */
+}
+
+.read {
+    position: relative;
+    float: left;
+    width: 34%;
+    height: 25px;
+    font-size: 0.875rem;
+    box-sizing: border-box;
+    border: 1px solid #125716;
+    border-left-width: 0;
+    color: #212121;
+    margin-bottom: 0;
+    background-color: #5ae8a4;
+}
