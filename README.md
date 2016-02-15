@@ -135,7 +135,7 @@ The calendar consists of eight main components:
     * Provides the calendar's side and bottom borders
     * *There is no overflow setting on this layer as setting overflow: hidden for this layer could cause a gap between the table and the border in Internet Explorer 11 & Edge (see the section on Resolved technical difficulties below for more info about the gap)*
   7. Calendar scroll container
-    * The scroll container is set to overflow: auto creating a standard browser vertical scrollbar on the right side of the container
+    * The scroll container is set to overflow-y: scroll creating a standard browser vertical scrollbar on the right side of the container
     * *The scroll container is wider than the table (by 47px). This creates a space between the calendar's scrollbar and browser's scrollbar. The space prevents the cursor from reverting to the standard pointer if the user moves the mouse slightly to the right while dragging the thumb.*
   8. Calendar weeks table
     * Each row in the table is one week
@@ -190,7 +190,7 @@ On Microsoft browsers (IE11 & Edge) a white "gap" appeared on the right side of 
 
 ![Example of the gap problem on IE11 browser](images/IEGap.png)
 
-My solution was to add a layer on top with that layer's overflow set to auto so that layer would hide the browser's scrollbars.
+My solution was to add a layer on top with that layer's overflow-y set to scroll so that layer would hide the browser's scrollbars.
 
 #### :hover for devices with both a mouse and touch
 I initially used hover on the scroll container to trigger the thumb and track displaying, but that causes a problem on a touch device. Tapping the table caused hover to be "on" and it wouldn't turn off, leaving the thumb/track displayed all of the time. That wouldn't have been an issue for me, as I'm using the calendar to switch to a new URL, but in the interest of having a cleaner solution, I wanted something that could turn the thumb/track on and off.
