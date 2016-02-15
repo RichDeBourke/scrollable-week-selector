@@ -94,7 +94,9 @@
     width: 300px; /* Was 273px but I expanded it to move the natural scroll bar more to the right so the mouse wouldn't change */
     padding: 0 20px 0 0;
     margin: 0;
-    overflow: auto;
+    overflow-y: scroll; /* has to be scroll, not auto to get momentum scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
     cursor: pointer;
     z-index: 10;
 }
