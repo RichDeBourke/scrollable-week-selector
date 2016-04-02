@@ -4,6 +4,8 @@
  * Date: 2016/02/13
  * By: Rich DeBourke
  * License: MIT
+ *
+ * https://github.com/RichDeBourke/javascript-binary-data-storage
  * ======================================================================= */
 
 (function (window) {
