@@ -4,6 +4,8 @@
  * Date: 2016/02/07
  * By: Rich DeBourke
  * License: MIT
+ * https://github.com/RichDeBourke/scrollable-week-selector
+ *
  * Plugin framework based on: jquery-boilerplate - v3.4.0
  * from http://jqueryboilerplate.com
  * By Zeno Rocha & distributed under MIT License
@@ -296,13 +298,13 @@
                 return $tableBody;
             }
 
-            function createThumb () {
+            function createThumb() {
                 return $("<div>", {
                     class: "calendar-thumb"
                 });
             }
 
-            function createTrack () {
+            function createTrack() {
                 return $("<div>", {
                     class: "calendar-track"
                 });
