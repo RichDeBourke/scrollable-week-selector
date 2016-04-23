@@ -52,18 +52,16 @@
     <script type="text/javascript" src="js/WeekHistory.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             "use strict";
             var weeklyHistoryArray = window.getWeeklyHistory("calendarHistory", 522),
-                touchStatus,
+                touchStatus = false,
                 $calendarHandle,
                 $rowFirstTd;
 
-            // Set the calendar variables (normally I set the variables when they're declared)
-            if (('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch) || (navigator.MaxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)) {
+            // If a touch capable browser, than configure for touch
+            if (('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0)) {
                 touchStatus = true;
-            } else {
-                touchStatus = false;
             }
 
             $("#week-select-calendar").scrollableCalendar({

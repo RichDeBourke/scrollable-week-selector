@@ -33,7 +33,7 @@
 
                 localStorageData = JSON.parse(window.localStorage.getItem(storageName));
             }
-            catch(err) {
+            catch (err) {
                 localStorageData = false;
             }
 
@@ -70,7 +70,7 @@
                 currentDateArray = dateStringToArray(currentDate),
                 baseDateObj = new Date(baseDateArray[0], baseDateArray[1] - 1, baseDateArray[2]),
                 currentWeekObj = new Date(currentDateArray[0], currentDateArray[1] - 1, currentDateArray[2]),
-                weekDelta = Math.round((currentWeekObj - baseDateObj)/(1000*60*60*24*7)),
+                weekDelta = Math.round((currentWeekObj - baseDateObj) / (1000 * 60 * 60 * 24 * 7)),
                 weekBlock = Math.floor(weekDelta / 32),
                 weekOffset = weekDelta % 32,
                 success = true;
@@ -80,7 +80,7 @@
             try {
                 window.localStorage.setItem(storageName, JSON.stringify(localStorageData));
             }
-            catch(err) {
+            catch (err) {
                 success = false;
             }
 

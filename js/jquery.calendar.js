@@ -1,7 +1,7 @@
 /* =======================================================================
  * jquery.calendar.js
- * Version: 1.0
- * Date: 2016/02/07
+ * Version: 1.1
+ * Date: 2016/04/23
  * By: Rich DeBourke
  * License: MIT
  * https://github.com/RichDeBourke/scrollable-week-selector
@@ -11,9 +11,6 @@
  * By Zeno Rocha & distributed under MIT License
  * Scroll based on fakeScroll - from https://github.com/yairEO/fakescroll
  * By Yair Even-Or (heavily modified)
- *
- * Unminified version of the code available in the same directory
- * as the minified version (in case anyone wants to see it)
  * ======================================================================= */
 
 (function ($, window, document) {
@@ -72,7 +69,7 @@
 
         currentRow = Math.floor((currentWeekObj.getTime() - startDateObj.getTime()) / (1000 * 60 * 60 * 24 * 7)) + 1;
 
-        if (settings.touchStatus) {
+        if (settings.touch) {
             displayRows = 6;
         } else {
             displayRows = 8;
@@ -314,7 +311,7 @@
                 var moveStartThumbPosition = 0,
                     thumbPositionY = 0,
                     containerScrollHeight,
-                    containerClientHeight = 232, // $container[0].clientHeight takes 100ms for a reflow for the calculation
+                    containerClientHeight = settings.containerClientHeight, //$container[0].clientHeight takes 100ms for reflow calculation
                     scrollRatio = 1,
                     maxThumbPosition,
                     dragQueued = false;
@@ -415,6 +412,7 @@
             $scrollContainer.appendTo($calendarBorder);
             // Store the $scrollContainer to use for the setWeek function
             this.container = $scrollContainer;
+            this.settings.containerClientHeight = $scrollContainer.height();
 
             $table = createCalendar(this.settings);
             $table.appendTo($scrollContainer);
