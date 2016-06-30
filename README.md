@@ -11,6 +11,10 @@ Scrollable Week Selector / Indicator
 
 ![Example of mouse-only and mouse/touch calendars](images/CalendarExamples.png)
 
+## Dependencies
+* jQuery 2.X or 3.X - The plugin only supports newer browsers including IE from version 9 - it does not support IE8 or lower
+    * The plugin does **not** work with the slim build version of jQuery 3.X
+
 ## Usage
 
 Include the CSS file in the head section
@@ -23,7 +27,7 @@ Add a div for the calendar in the body section
     
 Add jQuery, the calendar plugin, and the JavaScript code to initiate the calendar
 
-    <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="jquery-3.0.0.min"></script>
     <script type="text/javascript" src="jquery.calendar.js"></script>
 
     <script type="text/javascript">
