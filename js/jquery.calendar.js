@@ -1,7 +1,16 @@
 /* =======================================================================
  * jquery.calendar.js
+ * Version 1.0
+ * Date: 2016/02/07
+ * Initial release
  * Version: 1.1
  * Date: 2016/04/23
+ * Added settings value for track height and revised the conditions to
+ * select a touch device
+ * Version 1.2
+ * Date: 2019/02/03
+ * Added an option to designate the first day of the week
+ * 
  * By: Rich DeBourke
  * License: MIT
  * https://github.com/RichDeBourke/scrollable-week-selector
@@ -14,13 +23,14 @@
  * ======================================================================= */
 
 (function ($, window, document) {
-    'use strict';
+    "use strict";
 
     var pluginName = "scrollableCalendar",
         $doc = $(document),
         defaults = {
             startDate: "2012-01-01",
             endDate: "2022-01-22", // use Jan 21, 2017 for a five year test calendar, Jan 22, 2022 for ten year
+            startDay: 0, // default is 0 for Sunday - can be from 0 to 6 (I'm using zero based as that's how Date.getDay() works)
             currentWeek: "latest-week",
             highlight: true,
             readWeeks: [],
@@ -34,7 +44,7 @@
             onClick: function () { // alert is just for testing
                 window.alert(this); // "this" is the date string for the row that was clicked
             },
-            // The final values for rowHeight & rowCount are set programably - any presets or options values are ignored
+            // The final values for rowHeight & rowCount are set programably based on the touchRowHeight or the nonTouchRowHeight values - any presets or options values are ignored
             rowHeight: 29, // This value is set in validateSettings function (any value passed in is ignored)
             rowCount: 0 // This value is set in the init function (any value passed in is ignored)
         },
@@ -57,15 +67,33 @@
         return (dateObj.getFullYear() + "-" + padNumber(dateObj.getMonth() + 1) + "-" + padNumber(dateObj.getDate()));
     }
 
+    function vaidateDateDay(dateString, startDay, weekStart) {
+        // Early versions of Safari need the date in an array format rather than just a string
+        var dateArray = dateString.split(/[^0-9]/),
+            dateObj = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]),
+            dayOffset,
+            newDateObject,
+            endDay;
+        if (weekStart) {
+            dayOffset = startDay - dateObj.getDay();
+            newDateObject = new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate()+ dayOffset);
+        } else { // date is the last day of the week
+            endDay = startDay - 1;
+            if (endDay < 0) {
+                endDay = 6;
+            }
+            dayOffset = startDay - dateObj.getDay();
+            newDateObject = new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate()+ dayOffset);
+        }
+        return newDateObject.toDateString();
+    }
+
     function positionContainer($container, settings) {
         var newScrollTop,
             currentRow,
             displayRows,
             startDateObj = new Date(settings.startDate),
             currentWeekObj = new Date(settings.currentWeek);
-
-        // make sure the current date is a Sunday
-        currentWeekObj.setDate(currentWeekObj.getDate() - currentWeekObj.getDay());
 
         currentRow = Math.floor((currentWeekObj.getTime() - startDateObj.getTime()) / (1000 * 60 * 60 * 24 * 7)) + 1;
 
@@ -90,13 +118,14 @@
         if (settings.highlight) {
             // clear out any existing current week class (if any is set) and highlight the current week
             $("tr", $container).removeClass("cal-current-week");
+            var tmp1 = createDateString(currentWeekObj);
             $("tr[data-date=" + createDateString(currentWeekObj) + "]", $container).addClass("cal-current-week");
         }
     }
 
-    // boilerplate uses extend to avoid Plugin.prototype conflicts (not clear why the boilerplate has
-    // this when Plugin.prototype.setWeek = function () seems to work just as well), but that's the
-    // way they did it.
+    // boilerplate uses extend to avoid Plugin.prototype conflicts (not clear why the
+    // boilerplate has this when Plugin.prototype.setWeek = function () seems to work
+    // just as well), but that's the way they did it.
     $.extend(Plugin.prototype, {
 
         init: function () {
@@ -105,33 +134,21 @@
                 return (monthArray[month]);
             }
 
-            // Early versions of Safari need the date in an array format rather than just a string
-            function dateStringToArray(dateString) {
-                return (dateString.split(/[^0-9]/));
-            }
-
             function validateSettings(settings) {
-                // Make sure the start and current dates are Sundays and the end date is a Saturday
-                var startDateObj = dateStringToArray(settings.startDate),
-                    endDateObj = dateStringToArray(settings.endDate),
-                    currentWeekObj;
+                function arrayRotate(arr, count) {
+                    count -= arr.length * Math.floor(count / arr.length);
+                    arr.push.apply(arr, arr.splice(0, count));
+                    return arr;
+                }
 
-                startDateObj = new Date(startDateObj[0], startDateObj[1] - 1, startDateObj[2]);
-                endDateObj = new Date(endDateObj[0], endDateObj[1] - 1, endDateObj[2]);
-
-                startDateObj.setDate(startDateObj.getDate() - startDateObj.getDay());
-                endDateObj.setDate(endDateObj.getDate() + 6 - endDateObj.getDay());
-                settings.startDate = startDateObj.toDateString();
-                settings.endDate = endDateObj.toDateString();
+                // Make sure the start and current dates are equal to the startDay and the end date is end of the needed week
+                settings.startDate = vaidateDateDay(settings.startDate, settings.startDay, true);
+                settings.endDate = vaidateDateDay(settings.endDate, settings.startDay, false);
 
                 if (settings.currentWeek === "latest-week") {
-                    currentWeekObj = new Date(endDateObj.getTime() - (1000 * 60 * 60 * 24 * 6)); // Subtract 6 days
-                    settings.currentWeek = currentWeekObj.toDateString();
+                    settings.currentWeek = vaidateDateDay(settings.endDate, settings.startDay, true);
                 } else {
-                    currentWeekObj = dateStringToArray(settings.currentWeek);
-                    currentWeekObj = new Date(currentWeekObj[0], currentWeekObj[1] - 1, currentWeekObj[2]);
-                    currentWeekObj.setDate(currentWeekObj.getDate() - currentWeekObj.getDay()); // Make sure it's a Sunday
-                    settings.currentWeek = currentWeekObj.toDateString();
+                    settings.currentWeek = vaidateDateDay(settings.currentWeek, settings.startDay, true);
                 }
 
                 // Set the rowHeight
@@ -140,6 +157,9 @@
                 } else {
                     settings.rowHeight = settings.nonTouchRowHeight;
                 }
+
+                // Adjust the dayNames to match the startDay
+                settings.dayNames = arrayRotate(settings.dayNames, settings.startDay);
 
                 return settings;
             }
@@ -497,7 +517,7 @@
         },
 
         setWeek: function (newDate) {
-            this.settings.currentWeek = newDate;
+            this.settings.currentWeek = vaidateDateDay(newDate, this.settings.startDay, true);
 
             positionContainer(this.container, this.settings);
         }

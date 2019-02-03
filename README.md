@@ -11,6 +11,9 @@ Scrollable Week Selector / Indicator
 
 ![Example of mouse-only and mouse/touch calendars](images/CalendarExamples.png)
 
+## Revision 1.2 - 2019/02/03
+Added an option to start the week on a different day (e.g. Tu) based on a feature request.
+
 ## Dependencies
 * jQuery 2.X or 3.X - The plugin only supports newer browsers including IE from version 9 - it does not support IE8 or lower
     * The plugin does **not** work with the slim build version of jQuery 3.X
@@ -62,10 +65,11 @@ The date should be a Sunday.
 
 ## Options
 
-  * **startDate:** "2012-01-01" - calendar start date (*should be a Sunday*)
+  * **startDate:** "2012-01-01" - calendar start date (*should be the date for your week starting day, but the plugin will change it if it isn't*)
     * *All dates must be in the YYYY-MM-DD format*
-  * **endDate:** "2022-01-22" - calendar end date (*should be a Saturday*)
-  * **currentWeek:** "latest-week" or a date ~ "2016-01-03" (*should be a Sunday*)
+  * **endDate:** "2022-01-22" - calendar end date (*should be the date for your week ending day, but the plugin will change it if it isn't*)
+  * **startDay:** 0~6 - sets the first day of the week
+  * **currentWeek:** "latest-week" or a date ~ "2016-01-03" (*should be the date for your week starting day, but the plugin will change it if it isn't*)
     * *The current week is positioned at the third row (if there are enough weeks after that week in the calendar) or at the bottom of the calendar (if the current week is the latest week)*
     * *If "latest-week", the endDate week will be set as the current week*
     * *There is no validation of the date text string*
@@ -74,7 +78,7 @@ The date should be a Sunday.
   * **readWeeks:** [] - array of true/false for week status
     * *If the array is empty, no weeks are indicated* 
   * **dayNames:** ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
-    * *Revise for other languages, if desired*
+    * *Revise for other languages, if desired - the array must start with Sunday*
   * **monthNames:** ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     * *Revise for other languages, if desired*
   * **calendarTitle:** "" (*if blank, there is no title*)   
@@ -85,6 +89,14 @@ The date should be a Sunday.
   * **nonTouchRowHeight:** 29
   * **onClick:** function () { alert(this); }
     * *Replace with your own function* 
+
+#### startDay
+
+The startDay sets the calendar start day - default is Sunday.
+
+    startDay: 0 // 0 for Sunday
+
+![Example of mouse-only and mouse/touch calendars](images/startDayExamples.png)
 
 #### readWeeks Array
 
@@ -205,14 +217,14 @@ I switched from using hover to using listeners for *mouseenter*, *mouseleave*, a
 
 The calendar plugin has been confirmed to work with the latest versions of:
 
-* IE 9 & 11 *(CSS gradients don't work on IE9, but everything else works)*
+* IE 9, 10, & 11 *(CSS gradients don't work on IE9, but everything else works)*
 * Edge (desktop & Surface)
 * Chrome (mobile & desktop)
 * Firefox
 * Android Internet
 * Safari (mobile & desktop)
 
-*The plugin will not work with older versions of IE (I use jQuery 2.1.4). My view is it is time to stop supporting older browsers. I do provide a notice that because of the older browser someone is using, they won't be able to properly utilize my site.*
+*The plugin will not work with older versions of IE (I use jQuery 2.1.4). My view is it is time to stop supporting older browsers. I do provide a notice on my site that because of the older browser someone is using, they won't be able to properly utilize my site.*
 
 ## License
 
