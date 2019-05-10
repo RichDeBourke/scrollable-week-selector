@@ -1,0 +1,227 @@
+$color_1: #ffffff;
+$color_2: #212121;
+$background_color_1: #125716;
+$background_color_2: transparent;
+$background_color_3: rgba(18, 87, 22, 0.4);
+$background_color_4: #216d38;
+$background_color_5: #E1EDE2;
+$background_color_6: #BFDEC0;
+$background_color_7: #5ae8a4;
+$background_color_8: #00DB71;
+
+/* jQuery Scrollable Calendar Styling */
+/* I use pixels instead of rems as IE11 rounds rem values to two decimal places */
+.cal-year {
+	padding: 0;
+	background-clip: border-box;
+	-o-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-color: $background_color_1;
+	font-weight: 400;
+	color: $color_1;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	height: 29px;
+	width: 50px;
+}
+.cal-day-head {
+	padding: 0;
+	background-clip: border-box;
+	-o-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-color: $background_color_1;
+	font-weight: 400;
+	color: $color_1;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	height: 29px;
+	width: 29px;
+}
+.cal-month {
+	padding: 0;
+	background-clip: border-box;
+	-o-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	width: 50px;
+}
+.cal-day-body {
+	padding: 0;
+	background-clip: border-box;
+	-o-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	width: 29px;
+}
+.calendar-container {
+	overflow: hidden;
+	width: 256px;
+	height: auto;
+	position: relative;
+	box-sizing: border-box;
+}
+.calendar-border {
+	position: relative;
+	box-sizing: border-box;
+	border: 1px solid #125716;
+	border-top-width: 0;
+	width: 255px;
+	z-index: 11;
+	-webkit-tap-highlight-color: transparent;
+}
+.calendar-table {
+	margin-bottom: 0;
+	border-collapse: separate;
+	border: none 0 #fff;
+	table-layout: fixed;
+	font-size: 0.875rem;
+	line-height: 1.125rem;
+	text-align: center;
+	border-spacing: 0;
+	background-color: $background_color_2;
+	-o-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	thead {
+		background-color: $background_color_2;
+	}
+}
+.calendar-title {
+	position: relative;
+	width: 255px;
+	text-align: center;
+}
+.calendar-heading-table {
+	position: relative;
+	z-index: 14;
+	width: 255px;
+	box-sizing: border-box;
+	border: 1px solid #125716;
+	border-radius: 4px 4px 0 0;
+	box-shadow: 0 3px 4px -2px rgba(0, 0, 0, 0.5);
+}
+.cal-mouse-only {
+	height: 233px;
+	.calendar-track {
+		height: 232px;
+	}
+}
+.calendar-scroll-container {
+	position: relative;
+	float: left;
+	height: 100%;
+	width: 300px;
+	padding: 0 20px 0 0;
+	margin: 0;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+	white-space: nowrap;
+	cursor: pointer;
+	z-index: 10;
+}
+.calendar-thumb {
+	position: absolute;
+	width: 22px;
+	height: 45px;
+	margin: 0;
+	right: 1px;
+	top: 0;
+	background-color: $background_color_1;
+	background: -moz-radial-gradient(center, ellipse cover, #91cf94 0%, #125716 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #91cf94), color-stop(100%, #125716));
+	background: -webkit-radial-gradient(center, ellipse cover, #91cf94 0%, #125716 100%);
+	background: -o-radial-gradient(center, ellipse cover, #91cf94 0%, #125716 100%);
+	background: -ms-radial-gradient(center, ellipse cover, #91cf94 0%, #125716 100%);
+	background: radial-gradient(ellipse at center, #91cf94 0%, #125716 100%);
+	border-radius: 11px;
+	cursor: ns-resize;
+	z-index: 13;
+	opacity: 0;
+	transition: opacity 0.2s linear 0s;
+}
+.cal-scroll-grabbed {
+	cursor: ns-resize;
+}
+.calendar-track {
+	background-color: $background_color_1;
+	background-color: $background_color_3;
+	position: absolute;
+	margin: 0;
+	right: 0;
+	top: 0;
+	width: 24px;
+	border-radius: 12px;
+	z-index: 12;
+	opacity: 0;
+	transition: opacity 0.2s linear 0s;
+}
+.cal-mouse-touch {
+	.calendar-track {
+		height: 288px;
+	}
+	height: 289px;
+}
+.cal-border-entered {
+	opacity: 1;
+}
+.cal-thumb-grabbed {
+	opacity: 1;
+}
+.cal-touch-width {
+	width: 2px;
+	right: 0;
+	background-color: $background_color_4;
+}
+.calendar-weeks-table {
+	width: 253px;
+	left: 0;
+	z-index: auto;
+	position: relative;
+	float: left;
+}
+.cal-mouse-only-td {
+	height: 29px;
+}
+.cal-mouse-touch-td {
+	height: 48px;
+}
+.cal-odd-month {
+	background-color: $background_color_5;
+}
+.cal-even-month {
+	background-color: $background_color_6;
+}
+.cal-month-read {
+	background-color: $background_color_7;
+}
+.cal-current-week {
+	td {
+		background-color: $background_color_8;
+		color: $color_2;
+	}
+}
+.cal-row {
+	&:hover {
+		td {
+			background-color: $background_color_1;
+			color: $color_1;
+		}
+	}
+}

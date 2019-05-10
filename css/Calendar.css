@@ -72,7 +72,6 @@
 
 .calendar-heading-table {
     position: relative;
-    box-sizing: border-box;
     z-index: 14;
     width: 255px;
     box-sizing: border-box;
@@ -81,7 +80,7 @@
     box-shadow: 0 3px 4px -2px rgba(0, 0, 0, 0.5);
 }
 
-/* I use IE11 instead of rems as IE11 rounds rem values to two decimal places */
+/* I use pixels instead of rems as IE11 rounds rem values to two decimal places */
 
 .cal-mouse-only {
     height: 233px;
@@ -193,7 +192,7 @@
 .cal-even-month {
     background-color: #BFDEC0;
 }
-.cal-month-read { /* for my color scheme, odd and even read months are the same background color */
+.cal-month-read { /* for my color scheme, odd and even months that have already been read are the same background color */
     background-color: #5ae8a4;
 }
 .cal-current-week td {
